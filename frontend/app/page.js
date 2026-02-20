@@ -93,10 +93,12 @@ export default function Home() {
               ) : (
                 <ul className="space-y-2">
                   {result.action_items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="mt-1 w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></span>
-                      <span className="text-gray-200">{item}</span>
-                    </li>
+  <li key={i} className="flex items-start gap-3">
+    <span className="mt-1 w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></span>
+    <span className="text-gray-200">
+      {typeof item === "string" ? item : item.description || JSON.stringify(item)}
+    </span>
+  </li>
                   ))}
                 </ul>
               )}
