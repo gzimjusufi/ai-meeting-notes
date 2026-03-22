@@ -69,7 +69,7 @@ export default function Home() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("https://ai-meeting-notes-production-b917.up.railway.app/transcribe-audio", {
+      const res = await fetch("https://ai-meeting-notes-pp63.onrender.com/transcribe-audio", {
         method: "POST",
         body: formData,
       });
