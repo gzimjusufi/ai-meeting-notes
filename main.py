@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = OpenAI()
+client = Groq()
 
 def transcribe_audio(file_bytes: bytes, filename: str) -> str:
     response = client.audio.transcriptions.create(
