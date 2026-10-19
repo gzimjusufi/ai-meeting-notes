@@ -20,7 +20,7 @@ client = Groq()
 def transcribe_audio(file_bytes: bytes, filename: str) -> str:
     response = client.audio.transcriptions.create(
         file=(filename, file_bytes),
-        model="whisper-large-v3", # Or use "distil-whisper-large-v3-en" for ultra-fast English
+        model="whisper-large-v3",
     )
     return response.text
 
@@ -33,11 +33,10 @@ Transcript:
 {text}"""
 
     response = client.chat.completions.create(
-        # Use a highly available, active Groq text model
-        model="llama-3.3-70b-versatile", 
+        model="openai/gpt-oss-20b", 
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
-        # Force Groq to respond with a structurally valid JSON object
+        # Forces the model to respond with valid JSON and avoids markdown blocks
         response_format={"type": "json_object"}, 
     )
 
