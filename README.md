@@ -4,7 +4,7 @@ A full-stack AI app that turns meeting recordings into transcripts, concise summ
 
 **Live demo:** https://frontend-five-nu-45.vercel.app/
 
-![Demo](screenshots/demo.gif)
+![Demo](screenshots/demo.png)
 
 ## Why I Built This
 
