@@ -15,12 +15,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = Groq()
+client = OpenAI()
 
 def transcribe_audio(file_bytes: bytes, filename: str) -> str:
     response = client.audio.transcriptions.create(
         file=(filename, file_bytes),
-        model="whisper-large-v3",
+        model="whisper-large-v3", # Or use "distil-whisper-large-v3-en" for ultra-fast English
     )
     return response.text
 
@@ -30,14 +30,15 @@ def ai_summary(text: str) -> dict:
 - "action_items": a list of concrete action items (empty list if none)
 
 Transcript:
-{text}
-
-Respond ONLY with valid JSON, no markdown."""
+{text}"""
 
     response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        # Use a highly available, active Groq text model
+        model="llama-3.3-70b-versatile", 
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
+        # Force Groq to respond with a structurally valid JSON object
+        response_format={"type": "json_object"}, 
     )
 
     raw = response.choices[0].message.content.strip()
